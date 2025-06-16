@@ -37,7 +37,7 @@ zabbix_export:
                 - tag: scope
                   value: availability
         - uuid: 04b21adaf422473a88df2c52786474ed
-          name: 'ICMP: ICMP loss Dennis - Github Actions6'
+          name: 'ICMP: ICMP loss Dennis - Github Actions3'
           type: SIMPLE
           key: icmppingloss
           history: 7d
