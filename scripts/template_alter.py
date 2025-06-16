@@ -6,9 +6,9 @@ ZABBIX_PASSWORD = os.getenv('ZABBIX_TOKEN')
 api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
 api.login(token={ZABBIX_PASSWORD})
 
-git_archive_name = subprocess.run( ["git", "diff", "--name-only", "origin/master"], capture_output=True, text=True)
-file_changed = git_archive_name.stdout.strip().splitlines()[0]
-print(git_archive_name)
+git_archive_name = subprocess.run(["git", "diff", "--name-only", "origin/master", "--", "templates/"], capture_output=True, text=True)
+file_changed = git_archive_name.stdout.strip().splitlines()
+print(file_changed)
 
 
 yaml_content = ''
@@ -43,5 +43,3 @@ result = api.configuration.import_({
 
 print("Importação concluída:", result)
 
-
-api.logout()
