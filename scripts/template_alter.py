@@ -3,7 +3,7 @@ from zabbix_utils import ZabbixAPI  # ou pyzabbix
 import os
 
 ZABBIX_PASSWORD = os.getenv('ZABBIX_TOKEN')
-api = ZabbixAPI(url="192.168.15.141")
+api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
 api.login(token={ZABBIX_PASSWORD})
 
 git_archive_name = subprocess.run( ["git", "diff", "--name-only", "origin/master"], capture_output=True, text=True)

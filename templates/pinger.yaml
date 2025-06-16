@@ -1,0 +1,16 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    - uuid: 61f44fe317a341859a3bced9f0b8d520
+      template: teste
+      name: teste
+      groups:
+        - name: Templates
+      items:
+        - uuid: 80d190261a6843738a3af274cf1e6b27
+          name: 'icmp ping'
+          type: SIMPLE
+          key: icmpping
