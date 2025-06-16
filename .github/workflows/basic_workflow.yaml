@@ -4,18 +4,20 @@ on:
   push:
     branches: [master]
     paths:
-      - 'templates/**'
+      - 'templates/**'  # Só roda se algo dentro de templates/ for alterado
 
 jobs:
   importar:
     runs-on: ubuntu-latest
-    
+
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
       - name: Instalar dependências
         working-directory: scripts
         run: pip install -r requirements.txt
 
       - name: Rodar importador Zabbix
         working-directory: scripts
-        run: |
-          python3 template_alter.py
+        run: python3 template_alter.py
