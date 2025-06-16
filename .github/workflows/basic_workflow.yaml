@@ -1,7 +1,8 @@
 name: Importar template Zabbix
 
 on:
-  pull_request:
+  push:
+    branches: [master]
     paths:
       - 'templates/**'
 
