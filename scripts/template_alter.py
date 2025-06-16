@@ -2,8 +2,9 @@ import subprocess
 from zabbix_utils import ZabbixAPI  # ou pyzabbix
 import os
 
+ZABBIX_PASSWORD = os.getenv('ZABBIX_TOKEN')
 api = ZabbixAPI(url="192.168.15.141")
-api.login(user="Admin", password="zabbix")
+api.login(token={ZABBIX_PASSWORD})
 
 git_archive_name = subprocess.run( ["git", "diff", "--name-only", "origin/master"], capture_output=True, text=True)
 file_changed = git_archive_name.stdout.strip().splitlines()[0]

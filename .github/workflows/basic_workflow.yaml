@@ -20,4 +20,6 @@ jobs:
 
       - name: Rodar importador Zabbix
         working-directory: scripts
+        env:
+          TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: python3 template_alter.py
