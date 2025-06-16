@@ -8,6 +8,7 @@ api.login(token={ZABBIX_PASSWORD})
 
 git_archive_name = subprocess.run( ["git", "diff", "--name-only", "origin/master"], capture_output=True, text=True)
 file_changed = git_archive_name.stdout.strip().splitlines()[0]
+print(git_archive_name)
 
 
 yaml_content = ''
