@@ -7,7 +7,7 @@ api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
 api.login(token={ZABBIX_PASSWORD})
 
 git_archive_name = subprocess.run(["git", "diff", "--name-only", "HEAD@{1}", "HEAD", "--relative", "templates/"], capture_output=True, text=True)
-changed_files = [file.strip() for file in result.stdout.splitlines() if file.strip()]
+changed_files = [file.strip() for file in git_archive_name.stdout.splitlines() if file.strip()]
 
 print("Arquivos modificados no último push:")
 print("\n".join(changed_files))
