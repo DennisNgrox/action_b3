@@ -25,7 +25,7 @@ jobs:
         working-directory: scripts
         run: pip install -r requirements.txt
 
-      - name: Rodar importador Zabbix
+      - name: Rodar importador Zabbix # Sempre trabalhar no diretorio default
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
