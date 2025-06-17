@@ -30,14 +30,6 @@ jobs:
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
-          # Forma mais robusta de capturar arquivos modificados
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- templates/)
-          echo "Arquivos a processar:"
           echo "$CHANGED_FILES"
           
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "Nenhum arquivo para processar"
-            exit 0
-          fi
-          
-          python3 template_alter.py "$CHANGED_FILES"
