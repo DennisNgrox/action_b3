@@ -19,7 +19,7 @@ jobs:
       - name: Debug - Verificar segredos e arquivos
         run: |
           echo "TOKEN_ZABBIX está definido? ${{ secrets.TOKEN_ZABBIX != '' }}"
-          git diff --name-only HEAD~1 HEAD -- templates/
+          cat $(git diff --name-only HEAD~1 HEAD -- templates/)
 
       - name: Instalar dependências
         working-directory: scripts
