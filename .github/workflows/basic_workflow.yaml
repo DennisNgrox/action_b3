@@ -14,7 +14,7 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # Precisa de pelo menos 2 commits para HEAD~1
+          fetch-depth: 2 
 
       - name: Debug - Verificar segredos e arquivos
         run: |
@@ -30,6 +30,13 @@ jobs:
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- templates/)
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- templates/)
+          echo "Arquivos a processar:"
           echo "$CHANGED_FILES"
           
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "Nenhum arquivo para processar"
+            exit 0
+          fi
+          
+          python3 template_alter.py $CHANGED_FILES
