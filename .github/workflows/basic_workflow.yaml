@@ -14,7 +14,7 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0  # Importante para acessar HEAD~1
 
       - name: Debug - Verificar segredos e arquivos
         run: |
@@ -30,4 +30,8 @@ jobs:
         working-directory: scripts
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
-        run: python3 template_alter.py
+        run: |
+          # Captura os arquivos modificados e passa para o script
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD --relative templates/)
+          echo "Arquivos a processar: $CHANGED_FILES"
+          python3 template_alter.py "$CHANGED_FILES"
