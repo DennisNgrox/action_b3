@@ -14,13 +14,12 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Importante para acessar HEAD~1
+          fetch-depth: 2  # Precisa de pelo menos 2 commits para HEAD~1
 
       - name: Debug - Verificar segredos e arquivos
         run: |
           echo "TOKEN_ZABBIX está definido? ${{ secrets.TOKEN_ZABBIX != '' }}"
-          echo "Arquivos modificados em templates/:"
-          git diff --name-only HEAD~1 HEAD --relative templates/
+          git diff --name-only HEAD~1 HEAD -- templates/
 
       - name: Instalar dependências
         working-directory: scripts
@@ -31,7 +30,14 @@ jobs:
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
-          # Captura os arquivos modificados e passa para o script
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD --relative templates/)
-          echo "Arquivos a processar: $CHANGED_FILES"
+          # Forma mais robusta de capturar arquivos modificados
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- templates/ | xargs -I {} echo "templates/{}")
+          echo "Arquivos a processar:"
+          echo "$CHANGED_FILES"
+          
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "Nenhum arquivo para processar"
+            exit 0
+          fi
+          
           python3 template_alter.py "$CHANGED_FILES"
