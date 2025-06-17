@@ -17,7 +17,6 @@ jobs:
           fetch-depth: 2 
 
       - name: Debug - Verificar segredos e arquivos
-        working-directory: scripts
         run: |
           echo "TOKEN_ZABBIX está definido? ${{ secrets.TOKEN_ZABBIX != '' }}"
           cat $(git diff --name-only HEAD~1 HEAD -- templates/)
@@ -27,8 +26,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Rodar importador Zabbix
-        working-directory: scripts
         env:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
-          python3 template_alter.py $(git diff --name-only HEAD~1 HEAD -- templates/)
+          python3 scripts/template_alter.py $(git diff --name-only HEAD~1 HEAD -- templates/)
