@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
       - name: Debug - Verificar segredos e arquivos
         run: |
