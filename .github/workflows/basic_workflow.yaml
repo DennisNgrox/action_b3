@@ -31,7 +31,7 @@ jobs:
           TOKEN_ZABBIX: ${{ secrets.TOKEN_ZABBIX }}
         run: |
           # Forma mais robusta de capturar arquivos modificados
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- templates/ | xargs -I {} echo "templates/{}")
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- templates/)
           echo "Arquivos a processar:"
           echo "$CHANGED_FILES"
           
