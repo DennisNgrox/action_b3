@@ -11,6 +11,6 @@ zabbix_export:
         - name: Templates
       items:
         - uuid: 80d190261a6843738a3af274cf1e6b27
-          name: 'icmp ping - dennssi2s3'
+          name: 'icmp ping - dennssidas2s3'
           type: SIMPLE
           key: icmpping

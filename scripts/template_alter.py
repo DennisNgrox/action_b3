@@ -3,8 +3,13 @@ from zabbix_utils import ZabbixAPI  # ou pyzabbix
 import os
 
 ZABBIX_TOKEN = os.getenv('TOKEN_ZABBIX')
+if not ZABBIX_TOKEN:
+    logger.error("❌ TOKEN_ZABBIX não encontrado nas variáveis de ambiente!")
+    exit(1)
+    
 api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
 api.login(token=ZABBIX_TOKEN)
+
 
 
 git_archive_name = subprocess.run(["git", "diff", "--name-only", "HEAD@{1}", "HEAD", "--relative", "templates/"], capture_output=True, text=True)
