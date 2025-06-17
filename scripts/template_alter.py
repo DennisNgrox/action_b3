@@ -34,7 +34,7 @@ except Exception as e:
 try:
     logger.info("Executando git diff...")
     result = subprocess.run(
-        ["git", "diff", "--name-only", "origin/master", "HEAD", "--relative", "templates/"],
+        ["git", "diff", "--name-only", "HEAD~1", "HEAD", "--relative", "templates/"],
         capture_output=True,
         text=True
     )
