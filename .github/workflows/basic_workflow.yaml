@@ -17,6 +17,7 @@ jobs:
           fetch-depth: 2 
 
       - name: Debug - Verificar segredos e arquivos
+        working-directory: scripts
         run: |
           echo "TOKEN_ZABBIX está definido? ${{ secrets.TOKEN_ZABBIX != '' }}"
           cat $(git diff --name-only HEAD~1 HEAD -- templates/)
