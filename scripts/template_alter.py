@@ -5,6 +5,8 @@ import os
 ZABBIX_TOKEN = os.getenv('TOKEN_ZABBIX')
 api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
 api.login(token="{ZABBIX_TOKEN}")
+
+print({ZABBIX_TOKEN})
 # api.login(token="44332438277eeeee26932505e09c74ab0447be9cd13823e3cd65d7d633df891a")
 
 git_archive_name = subprocess.run(["git", "diff", "--name-only", "HEAD@{1}", "HEAD", "--relative", "templates/"], capture_output=True, text=True)
