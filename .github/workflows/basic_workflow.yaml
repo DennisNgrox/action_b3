@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "TOKEN_ZABBIX está definido? ${{ secrets.TOKEN_ZABBIX != '' }}"
           echo "Arquivos modificados em templates/:"
-          git diff --name-only HEAD@{1} HEAD --relative templates/
+          git diff --name-only HEAD~1 HEAD --relative templates/
 
       - name: Instalar dependências
         working-directory: scripts
