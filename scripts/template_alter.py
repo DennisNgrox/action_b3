@@ -15,26 +15,22 @@ def main():
     try:
         logger.info("=== Iniciando script ===")
         
-        # Verifica o token
-        ZABBIX_TOKEN = "44332438277eeeee26932505e09c74ab0447be9cd13823e3cd65d7d633df891a"
+        ZABBIX_TOKEN = os.getenv('TOKEN_ZABBIX')
         if not ZABBIX_TOKEN:
             raise ValueError("Token do Zabbix não encontrado")
         logger.info("TOKEN_ZABBIX definido: Sim")
 
-        # Conecta à API
         logger.info("Conectando à API do Zabbix...")
         api = ZabbixAPI(url="https://zabbix.ageri.com.br/")
         api.login(token=ZABBIX_TOKEN)
         logger.info("Conectado à API do Zabbix com sucesso!")
 
-        # Obtém arquivos modificados do argumento
         if len(sys.argv) < 2:
             raise ValueError("Nenhum arquivo para processar")
         
         changed_files = sys.argv[1].split()
         logger.info(f"Arquivos a processar: {changed_files}")
 
-        # Processa cada arquivo
         for file_path in changed_files:
             try:
                 logger.info(f"Processando: {file_path}")
