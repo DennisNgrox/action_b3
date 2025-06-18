@@ -16,7 +16,7 @@ def main():
         logger.info("=== Iniciando script ===")
         
         # Verifica o token
-        ZABBIX_TOKEN = "44332438277eeeee26932505e09c74ab0447be9cd13823e3cd65d7d633df891a"
+        ZABBIX_TOKEN = 
         if not ZABBIX_TOKEN:
             raise ValueError("Token do Zabbix não encontrado")
         logger.info("TOKEN_ZABBIX definido: Sim")
